@@ -26,6 +26,53 @@ local helpers = {}
 local CENTER = {0.5, 0.5}
 local MAX_JITTER = 0.01
 
+
+--[[ Scales the provided image and adds it as a widget to the environment in the
+center of the screen.
+
+'env' (table) Psychlab task environment class.
+'targetImage' (tensor) RGB image to display on the target widget.
+'targetSize' (number in (0, 1]) target size as fraction of the screen.
+]]
+function helpers.addTargetImagePosition(env, targetImage, targetSize,position)
+  assert(targetImage, 'targetImage must not be nil')
+  assert(targetSize, 'targetSize must not be nil')
+  assert(targetSize > 0 and targetSize <= 1, 'targetSize must in (0, 1]')
+
+  env.target:copy(targetImage)
+  local sizeInPixels = helpers.getSizeInPixels(env.screenSize, targetSize)
+  local scaledImage = helpers.scaleImage(env.target,
+                                         sizeInPixels.width / 2,
+                                         sizeInPixels.height)
+
+  --modifying the position of the image depending on the variable position
+  local myTable = helpers.getUpperLeftFromCenter(helpers.getTargetCenter(env, CENTER),targetSize )
+  if position == "left" then
+	print("adding left")
+  	myTable[1] = 0.125
+  else
+	print("adding right")
+	--myTable[1] = 1 - myTable[1] - (sizeInPixels.width / 2) / sizeInPixels.height
+	myTable[1] = 0.5
+  end
+  
+  --doing some printing
+  for k,v in pairs(myTable) do 
+  	print("key: ", k, " value: ", v)
+  end
+
+  print("position is: ", position)
+
+
+  env.pac:addWidget{
+      name = 'target' .. position,
+      image = scaledImage,
+      pos = myTable,
+      size = {targetSize, targetSize},
+  }
+end
+
+
 --[[ Scales the provided image and adds it as a widget to the environment in the
 center of the screen.
 
