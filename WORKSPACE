@@ -90,17 +90,17 @@ new_http_archive(
 new_local_repository(
     name = "glib_archive",
     build_file = "glib.BUILD",
-    path ="/usr/local/Cellar/glib/2.58.1",
+    path ="/Users/mtrazzi/.brew/Cellar/glib/2.58.2",
 )
 
 new_local_repository(
     name = "sdl_system",
     build_file = "sdl.BUILD",
-    path = "/usr/local/Cellar/sdl2/2.0.8",
+    path = "/Users/mtrazzi/.brew/Cellar/sdl2/2.0.9/",
 )
 
 new_local_repository(
     name = "python_system",
     build_file = "python.BUILD",
-    path = "/Users/ThisCouldBeYou/homebrew/Cellar",
+    path = "/Users/mtrazzi/",
 )
