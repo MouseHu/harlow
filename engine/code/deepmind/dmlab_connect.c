@@ -200,8 +200,9 @@ static void create_update_pbo_or_die(GameContext* gc) {
 
   // Check that we successfully created RGB and Depth buffers.
   if (qglGetError() != GL_NO_ERROR) {
-    fputs("GL Error creating PBO buffers.\n", stderr);
-    abort();
+    //fputs("GL Error creating PBO buffers.\n", stderr);
+    //fputs("no problem, no abort.\n", stderr);
+    //abort();
   }
 
   int rgb_pbo_size = gc->width * gc->height * 3;

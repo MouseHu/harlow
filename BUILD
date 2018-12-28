@@ -986,6 +986,26 @@ py_binary(
     deps = ["@six_archive//:six"],
 )
 
+# Adding my own python random agents
+py_binary(
+    name = "python_random_agent_simple",
+    srcs = ["python/random_agent_simple.py"],
+    data = [":deepmind_lab.so"],
+    main = "python/random_agent_simple.py",
+    visibility = ["//python/tests:__subpackages__"],
+    deps = ["@six_archive//:six"],
+)
+
+# Adding my agent to play harlow level
+py_binary(
+    name = "python_harlow",
+    srcs = ["python/harlow.py"],
+    data = [":deepmind_lab.so"],
+    main = "python/harlow.py",
+    visibility = ["//python/tests:__subpackages__"],
+    deps = ["@six_archive//:six"],
+)
+
 LOAD_TEST_SCRIPTS = [
     level_script[len("game_scripts/levels/"):-len(".lua")]
     for level_script in glob(
