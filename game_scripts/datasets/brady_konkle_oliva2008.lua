@@ -21,7 +21,7 @@ local setting_overrides = require 'decorators.setting_overrides'
 local color_dataset = require 'datasets.color_dataset'
 
 local DATASET_TEMPLATE = '%04d.png'
-local DATASET_PATH = '/Users/mtrazzi/goinfre/macos/data/brady_konkle_oliva2008'
+local DATASET_PATH = '/sgoinfre/goinfre/Perso/kcosta/data/brady_konkle_oliva2008'
 local PRELOAD_CONTENT = false
 local DATASET_SIZE = 2400
 

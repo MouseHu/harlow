@@ -3,8 +3,8 @@
 #
 #	NEW
 #	---
-#   python headers /Users/mtrazzi/.brew/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Headers
-#   numpy get include with the python from Cellar /Users/mtrazzi/Library/Python/2.7/lib/python/site-packages/numpy/core/include/numpy/*
+#   python headers /Users/kcosta/.brew/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Headers
+#   numpy get include with the python from Cellar /Users/kcosta/Library/Python/2.7/lib/python/site-packages/numpy/core/include/numpy/*
 #
 #   OLD
 #   ---
@@ -20,12 +20,12 @@
 cc_library(
     name = "python",
     hdrs = glob([
-        ".brew/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Headers/*.h",
-        "Library/Python/2.7/lib/python/site-packages/numpy/core/include/numpy/*.h",
+        ".brew/Cellar/python@2/2.7.15_2/Frameworks/Python.framework/Headers/*.h",
+        ".brew/lib/python2.7/site-packages/numpy/core/include/numpy/*.h",
     ]),
     includes = [
-        ".brew/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Headers",
-        "Library/Python/2.7/lib/python/site-packages/numpy/core/include",
+        ".brew/Cellar/python@2/2.7.15_2/Frameworks/Python.framework/Headers",
+        ".brew/lib/python2.7/site-packages/numpy/core/include",
     ],
     visibility = ["//visibility:public"],
 )
