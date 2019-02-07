@@ -1,4 +1,4 @@
---[[ Copyright (C) 2018 Google Inc.
+--[[ Copyright (C) 2019 Google Inc.
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -15,9 +15,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ]]
 
-local factory = require 'factories.psychlab.harlow_task'
+local factory = require 'levels.contributed.psychlab.factories.harlow_factory'
 
 return factory.createLevelApi{
-    schema = 'continuous_recognition',
+    schema = 'harlow',
     episodeLengthSeconds = 300,
 }
