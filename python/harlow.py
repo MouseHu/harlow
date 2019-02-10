@@ -64,9 +64,12 @@ class SpringAgent(object):
 
     self.omega = np.array([
         0.1,  # look left-right
-        0.1,  # look up-down
-        0.1,  # strafe left-right
-        0.1,  # forward-backward
+        0,    # look up-down
+        # 0.1,  # look up-down
+        0,    # strafe left-right
+        # 0.1,  # strafe left-right
+        0,    # forward-backward
+        # 0.1,  # forward-backward
         0.0,  # fire
         0.0,  # jumping
         0.0  # crouching
@@ -120,11 +123,14 @@ class SpringAgent(object):
     self.action = self.velocity / self.velocity_scaling + 0.5 * self.action
 
     # Fire with p = 0.01 at each step
-    self.action[self.indices['FIRE']] = int(np.random.random() > 0.99)
+    # self.action[self.indices['FIRE']] = int(np.random.random() > 0.99)
 
     # Jump/crouch with p = 0.005 at each step
-    self.action[self.indices['JUMP']] = int(np.random.random() > 0.995)
-    self.action[self.indices['CROUCH']] = int(np.random.random() > 0.995)
+    # self.action[self.indices['JUMP']] = int(np.random.random() > 0.995)
+    # self.action[self.indices['CROUCH']] = int(np.random.random() > 0.995)
+
+    # No operations
+    # self.action = np.zeros([len(self.action_spec)])
 
     # Clip to the valid range and convert to the right dtype
     return self.clip_action(self.action)

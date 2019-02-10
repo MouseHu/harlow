@@ -193,15 +193,15 @@ function factory.createLevelApi(kwargs)
 	--printing stuff
 	print("printing the table self.screenSize")
 	local count = 0
-	for k,v in pairs(self.screenSize) do 
+	for k,v in pairs(self.screenSize) do
 		print("key: ", k, " value: ", v)
-		count = count + 1 
+		count = count + 1
 	end
 	print("table size", count)
-	
+
 	--hacking the screen size
 	--self.screenSize.width = self.screenSize.width / 2
-	
+
 	--debuging position of image
 	if position == "left" then
 		print("image is left")
@@ -215,7 +215,7 @@ function factory.createLevelApi(kwargs)
                                                     kwargs.fixationSize)
 
     local h = kwargs.buttonHeight * self.screenSize.height
-    local w = kwargs.buttonWidth * self.screenSize.width 
+    local w = kwargs.buttonWidth * self.screenSize.width
 
     self.images.greenImage = tensor.ByteTensor(h, w, 3)
     self.images.greenImage:select(3, 1):fill(100)
@@ -228,7 +228,7 @@ function factory.createLevelApi(kwargs)
     self.images.redImage:select(3, 3):fill(100)
 
     self.images.whiteImage = tensor.ByteTensor(h, w, 3):fill(255)
-   
+
 	--test to remove the black image
 	--self.images.blackImage = tensor.ByteTensor(h, w, 3)
 
@@ -320,7 +320,7 @@ function factory.createLevelApi(kwargs)
 	--adding target images left and right
 	psychlab_helpers.addTargetImagePosition(self, img, kwargs.targetSize,"left")
 	psychlab_helpers.addTargetImagePosition(self, img, kwargs.targetSize,"right")
-	
+
     self:addResponseButtons(self.currentTrial.isNew)
   end
 
