@@ -57,7 +57,6 @@ class two_step_task():
     self.transition_count[1 - self.last_is_rewarded, 1 - self.last_is_common, 1 - (self.last_action == action)] += 1
 
   def stayProb(self):
-    print(self.transition_count)
     row_sums = self.transition_count.sum(axis=-1)
     stay_prob = self.transition_count / row_sums[:,:,np.newaxis]
 
@@ -93,7 +92,6 @@ class two_step_task():
       self.last_action = action
       # book-keeping for plotting
       self.last_is_common = self.isCommon(action,self.state-1)
-      print("self.last_is_common is:", self.last_is_common)
 
 
     else:# case S_2 or S_3
@@ -112,7 +110,6 @@ class two_step_task():
     return new_state,reward,done,self.timestep
 
   def trial(self,action):
-    print(self.transition_count)
 
     # do one action in S_1, and keep track of the perceptually distinguishable state you arive in
     observation,_,_,_ = self.step(action)
