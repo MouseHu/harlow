@@ -14,7 +14,7 @@ S_3 = 2
 nb_states = 3
 
 class Worker():
-    def __init__(self,game,name,a_size,trainer,model_path,global_episodes,make_gif=False, collect_seed_transition_probs=[], plot_path=""):
+    def __init__(self,game,name,a_size,trainer,model_path,global_episodes,make_gif=False, collect_seed_transition_probs=[], plot_path="", frame_path=""):
         self.name = "worker_" + str(name)
         self.number = name
         self.model_path = model_path
@@ -30,9 +30,10 @@ class Worker():
         self.local_AC = AC_Network(a_size,self.name,trainer)
         self.update_local_ops = update_target_graph('global',self.name)
         self.env = game
-        # self.make_gif = make_gif
+        self.make_gif = make_gif
         self.collect_seed_transition_probs = collect_seed_transition_probs
         self.plot_path = plot_path
+        self.frame_path = frame_path
 
     def train(self,rollout,sess,gamma,bootstrap_value):
         rollout = np.array(rollout)
@@ -122,13 +123,13 @@ class Worker():
                     episode_buffer.append([s,a,r,t,d,v[0,0]])
                     episode_values.append(v[0,0])
 
-                    # if episode_count % 100 == 0 and self.name == 'worker_0':
-                        # if self.make_gif and self.env.last_state == S_2 or self.env.last_state == S_3:
-                        #     episode_frames.append(make_frame(frame_path,self.env.transitions,
-                        #                                             self.env.get_rprobs(),
-                        #                                             t, action=self.env.last_action,
-                        #                                             final_state=self.env.last_state,
-                        #                                             reward=r))
+                    if episode_count % 100 == 0 and self.name == 'worker_0':
+                        if self.make_gif and self.env.last_state == S_2 or self.env.last_state == S_3:
+                            episode_frames.append(make_frame(self.frame_path,self.env.transitions,
+                                                                    self.env.get_rprobs(),
+                                                                    t, action=self.env.last_action,
+                                                                    final_state=self.env.last_state,
+                                                                    reward=r))
 
 
 
@@ -160,10 +161,10 @@ class Worker():
                             self.plot(episode_count,train)
                             print ("Saved Plot")
 
-                        # if self.make_gif and (not train):
-                        #     # generate gif
-                        #     make_gif(episode_frames,frame_path+"/test_"+str(episode_count)+'.gif')
-                        #     print ("Saved Gif")
+                        if self.make_gif and (not train):
+                            # generate gif
+                            make_gif(episode_frames,self.frame_path+"/test_"+str(episode_count)+'.gif')
+                            print ("Saved Gif")
 
                     # only track datapoints for training every 10 episoodes
                     if train == True:

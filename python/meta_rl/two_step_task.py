@@ -55,6 +55,8 @@ class two_step_task():
         return rewards
 
     def isCommon(self,action,state):
+        print("action:", action)
+        print("state:", state)
         if self.transitions[action][state] >= 1/2:
             return True
         return False
@@ -62,22 +64,26 @@ class two_step_task():
     def updateStateProb(self,action):
         if self.last_is_rewarded: #R
             if self.last_is_common: #C
+                print("TOUJOURS (rewarded)")
                 if self.last_action == action: #Rep
                     self.transition_count[0,0,0] += 1
                 else: #URep
                     self.transition_count[0,0,1] += 1
             else: #UC
+                print("JAMAIS (rewarded)")
                 if self.last_action == action: #Rep
                     self.transition_count[0,1,0] += 1
                 else: #URep
                     self.transition_count[0,1,1] += 1
         else: #UR
             if self.last_is_common:
+                print("TOUJOURS (NOT rewarded)")
                 if self.last_action == action:
                     self.transition_count[1,0,0] += 1
                 else:
                     self.transition_count[1,0,1] += 1
             else:
+                print("JAMAIS (NOT rewarded)")
                 if self.last_action == action:
                     self.transition_count[1,1,0] += 1
                 else:
@@ -87,11 +93,12 @@ class two_step_task():
     def stayProb(self):
         print(self.transition_count)
         row_sums = self.transition_count.sum(axis=-1)
-        stay_prob = self.transition_count / (1 + row_sums[:,:,np.newaxis])
+        stay_prob = self.transition_count / row_sums[:,:,np.newaxis]
 
         return stay_prob
 
     def reset(self):
+        print("TOTO DANS LE RESET POUR KCOSTA")
         self.timestep = 0
 
         # for the two-step task plots
@@ -121,6 +128,8 @@ class two_step_task():
             self.last_action = action
             # book-keeping for plotting
             self.last_is_common = self.isCommon(action,self.state-1)
+            print("self.last_is_common is:", self.last_is_common)
+
 
         else:# case S_2 or S_3
             # get probability of reward in stage
