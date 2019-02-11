@@ -35,24 +35,38 @@ class DiscretizedRandomAgent(object):
   """Simple agent for DeepMind Lab."""
 
   ACTIONS = {
-      'look_left': _action(-20, 0, 0, 0, 0, 0, 0),
-      'look_right': _action(20, 0, 0, 0, 0, 0, 0),
-      'look_up': _action(0, 10, 0, 0, 0, 0, 0),
-      'look_down': _action(0, -10, 0, 0, 0, 0, 0),
-      'strafe_left': _action(0, 0, -1, 0, 0, 0, 0),
-      'strafe_right': _action(0, 0, 1, 0, 0, 0, 0),
-      'forward': _action(0, 0, 0, 1, 0, 0, 0),
-      'backward': _action(0, 0, 0, -1, 0, 0, 0),
-      'fire': _action(0, 0, 0, 0, 1, 0, 0),
-      'jump': _action(0, 0, 0, 0, 0, 1, 0),
-      'crouch': _action(0, 0, 0, 0, 0, 0, 1)
+      'look_left': _action(-120, 0, 0, 0, 0, 0, 0),
+      'look_right': _action(120, 0, 0, 0, 0, 0, 0),
+      # 'look_up': _action(0, 10, 0, 0, 0, 0, 0),
+      # 'look_down': _action(0, -10, 0, 0, 0, 0, 0),
+      # 'strafe_left': _action(0, 0, -1, 0, 0, 0, 0),
+      # 'strafe_right': _action(0, 0, 1, 0, 0, 0, 0),
+      # 'forward': _action(0, 0, 0, 1, 0, 0, 0),
+      # 'backward': _action(0, 0, 0, -1, 0, 0, 0),
+      # 'fire': _action(0, 0, 0, 0, 1, 0, 0),
+      # 'jump': _action(0, 0, 0, 0, 0, 1, 0),
+      # 'crouch': _action(0, 0, 0, 0, 0, 0, 1)
   }
 
   ACTION_LIST = list(six.viewvalues(ACTIONS))
 
-  def step(self, unused_reward, unused_image):
+  def __init__(self):
+    self.i = 0
+
+    self.rewards = 0
+
+  def step(self, reward, unused_image):
+    self.i += 1
+    self.rewards += reward
+    print(unused_image.shape)
+    print("Score:", self.rewards)
+    return random.choice(DiscretizedRandomAgent.ACTION_LIST[0:1]) if self.i % 2 == 0 else random.choice(DiscretizedRandomAgent.ACTION_LIST[1:2])
+    
     """Gets an image state and a reward, returns an action."""
     return random.choice(DiscretizedRandomAgent.ACTION_LIST)
+  
+  def reset(self):
+    pass
 
 
 class SpringAgent(object):
@@ -164,7 +178,8 @@ def run(length, width, height, fps, level, record, demo, demofiles, video):
 
   # Starts the random spring agent. As a simpler alternative, we could also
   # use DiscretizedRandomAgent().
-  agent = SpringAgent(env.action_spec())
+  # agent = SpringAgent(env.action_spec())
+  agent = DiscretizedRandomAgent()
 
   reward = 0
 
