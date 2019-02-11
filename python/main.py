@@ -10,20 +10,18 @@ from datetime import datetime
 from meta_rl.ac_network import AC_Network
 from meta_rl.worker import Worker
 from meta_rl.two_step_task import two_step_task
+from datetime import datetime
 
 def main():
 
     dir_name = "train_" + datetime.now().strftime("%m%d-%H%M%S")
 
-    # ## Training
-
     # Hyperparameters for training/testing
     gamma = .9
     a_size = 2
-    n_seeds = 2
+    n_seeds = 1
     num_episode_train = 20000
-    num_episode_test = 20
-
+    num_episode_test = 50
 
     collect_seed_transition_probs = []
 
@@ -63,7 +61,7 @@ def main():
                 workers = []
                 # Create worker classes
                 for i in range(num_workers):
-                    workers.append(Worker(two_step_task(),i,a_size,trainer,model_path,global_episodes, make_gif=False, collect_seed_transition_probs=collect_seed_transition_probs, plot_path=plot_path))
+                    workers.append(Worker(two_step_task(),i,a_size,trainer,model_path,global_episodes, make_gif=True, collect_seed_transition_probs=collect_seed_transition_probs, plot_path=plot_path, frame_path=frame_path))
                 saver = tf.train.Saver(max_to_keep=5)
 
             with tf.Session() as sess:
@@ -87,10 +85,8 @@ def main():
                     worker_threads.append(thread)
                 coord.join(worker_threads)
 
-
     # final plot of the different seeds
 
-    episode_count = 250
     common_sum = np.array([0.,0.])
     uncommon_sum = np.array([0.,0.])
 
