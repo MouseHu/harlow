@@ -999,9 +999,9 @@ py_binary(
 # Adding my agent to play harlow level
 py_binary(
     name = "python_harlow",
-    srcs = ["python/harlow.py"],
+    srcs = ["python/meta_rl/harlow.py"],
     data = [":deepmind_lab.so"],
-    main = "python/harlow.py",
+    main = "python/meta_rl/harlow.py",
     visibility = ["//python/tests:__subpackages__"],
     deps = ["@six_archive//:six"],
 )
