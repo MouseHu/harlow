@@ -40,13 +40,9 @@ class two_step_task():
       self.highest_reward_second_stage = S_2 if (self.highest_reward_second_stage == S_3) else S_3
 
   def get_rprobs(self):
-    """
-    probability of reward of states S_2 and S_3, in the form [[p, 1-p], [1-p, p]]
-    """
-    if (self.highest_reward_second_stage == S_2):
-      r_prob = 0.9
-    else:
-      r_prob = 0.1
+    """probability of reward of states S_2 and S_3, in the form [[p, 1-p], [1-p, p]]"""
+    
+    r_prob = 0.9 if (self.highest_reward_second_stage == S_2) else 0.1
 
     rewards = np.array([
       [r_prob, 1-r_prob],
@@ -55,12 +51,7 @@ class two_step_task():
     return rewards
 
   def isCommon(self,action,state):
-    print("self.highest_reward_second_stage:", self.highest_reward_second_stage)
-    print("action:", action)
-    print("state:", state)
-    if self.transitions[action][state] >= 1/2:
-      return True
-    return False
+    return self.transitions[action][state] >= (1.0 / 2.0)
 
   def updateStateProb(self,action):
     self.transition_count[1 - self.last_is_rewarded, 1 - self.last_is_common, 1 - (self.last_action == action)] += 1
@@ -73,7 +64,6 @@ class two_step_task():
     return stay_prob
 
   def reset(self):
-    print("TOTO DANS LE RESET POUR KCOSTA")
     self.timestep = 0
 
     # for the two-step task plots
@@ -118,10 +108,7 @@ class two_step_task():
 
     # new state after the decision
     new_state = self.get_state()
-    if self.timestep >= 200:
-      done = True
-    else:
-      done = False
+    done = self.timestep >= 200
     return new_state,reward,done,self.timestep
 
   def trial(self,action):
