@@ -77,8 +77,8 @@ local CENTER = {0.5, 0.5}
 local LEFT = {.25, .5}
 local RIGHT = {.75, .5}
 
-local TRAIN_BATCH = 1000
-local TEST_BATCH = 1000
+local TRAIN_BATCH = 2
+local TEST_BATCH = 2
 local IS_TRAIN = true
 
 local factory = {}
