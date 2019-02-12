@@ -8,10 +8,10 @@ from utils import *
 
 
 class AC_Network():
-  def __init__(self,a_size,scope,trainer):
+  def __init__(self,a_size,scope,trainer, width, height):
     with tf.variable_scope(scope):
       #Input and visual encoding layers
-      self.state = tf.placeholder(shape=[None, 16, 16, 3],dtype=tf.float32)
+      self.state = tf.placeholder(shape=[None, width, height, 3],dtype=tf.float32)
       self.prev_rewards = tf.placeholder(shape=[None,1],dtype=tf.float32)
       self.prev_actions = tf.placeholder(shape=[None],dtype=tf.int32)
       self.timestep = tf.placeholder(shape=[None,1],dtype=tf.float32)
