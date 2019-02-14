@@ -102,5 +102,5 @@ new_local_repository(
 new_local_repository(
     name = "python_system",
     build_file = "python.BUILD",
-    path = "/Users/kcosta/",
+    path = "/sgoinfre/goinfre/Perso/kcosta/anaconda3/envs/",
 )

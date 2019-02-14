@@ -20,12 +20,12 @@
 cc_library(
     name = "python",
     hdrs = glob([
-        ".brew/Cellar/python@2/2.7.15_2/Frameworks/Python.framework/Headers/*.h",
-        ".brew/lib/python2.7/site-packages/numpy/core/include/numpy/*.h",
+        "lab/include/python3.5m/*.h",
+        "lab/lib/python3.5/site-packages/numpy/core/include/numpy/*.h",
     ]),
     includes = [
-        ".brew/Cellar/python@2/2.7.15_2/Frameworks/Python.framework/Headers",
-        ".brew/lib/python2.7/site-packages/numpy/core/include",
+        "lab/include/python3.5m",
+        "lab/lib/python3.5/site-packages/numpy/core/include",
     ],
     visibility = ["//visibility:public"],
 )
