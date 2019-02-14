@@ -62,9 +62,10 @@ class AC_Network():
       #tuple used by LSTM cells. Stores (c,h) (==hidden state and output)
       # state_in = tf.contrib.rnn.LSTMStateTuple(c_in, h_in)
 
-      batch_size = 32
+      batch_size = 1
       self.state_in = state_in = stacked_lstm.zero_state(batch_size, tf.float32)
       self.state_init = stacked_lstm.zero_state(batch_size, tf.float32)
+      print("HERE")
       desperate(state_in)
 
       # step_size is the length of the _sequence_ (i.e. number of frames to take into account for a particular training?)
@@ -77,7 +78,11 @@ class AC_Network():
         sequence_length=step_size,
         time_major=False)
 
-      lstm_c, lstm_h = lstm_state
+      # lstm_state is a tuple containing the two lstms
+      lstm_state_1, lstm_state_2 = lstm_state
+
+      # we take the hidden state and the output from the second lstm
+      lstm_c, lstm_h = lstm_state_2
 
       self.state_out = (lstm_c[:1, :], lstm_h[:1, :])
 
