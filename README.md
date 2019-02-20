@@ -1,28 +1,20 @@
-# <img src="/docs/template/logo.png" alt="DeepMind Lab">
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mtrazzi/two-step-task/master/results/arxiv/arxiv_40k/train/training_40k_meta_rl.gif">
+</p>
 
-*DeepMind Lab* is a 3D learning environment based on id Software's
-[Quake III Arena](https://github.com/id-Software/Quake-III-Arena) via
-[ioquake3](https://github.com/ioquake/ioq3) and
-[other open source software](#upstream-sources).
+This repository presents our attempt at reproducing the simulations regarding the two-step task and the harlow task as described in the two papers:
+- [Learning to Reinforcement Learn, Wang et al., 2016](https://arxiv.org/pdf/1611.05763v1.pdf)
+- [Prefrontal cortex as a meta-reinforcement learning system, Wang et al., 2018](https://www.biorxiv.org/content/biorxiv/early/2018/04/13/295964.full.pdf)
 
-# <img src="/docs/template/harlow_task.gif" alt="Harlow Task">
-*In environment footage, captured via human player.*
+
+To reproduce the Harlow Task, we used *DeepMind Lab*, a 3D learning environment.
 
 *DeepMind Lab* provides a suite of challenging 3D navigation and puzzle-solving
 tasks for learning agents. Its primary purpose is to act as a testbed for
 research in artificial intelligence, especially deep reinforcement learning.
+For more infor about DeepMind Lab, you can checkout their repo [here](https://github.com/deepmind/lab).
 
-## About
-
-Disclaimer: This is not an official Google product.
-
-If you use *DeepMind Lab* in your research and would like to cite
-the *DeepMind Lab* environment, we suggest you cite
-the [DeepMind Lab paper](https://arxiv.org/abs/1612.03801).
-
-You can reach us at [lab@deepmind.com](mailto:lab@deepmind.com).
-
-## Floydhub Installation
+## Getting Started
 
 To download the repository:
 
@@ -48,127 +40,33 @@ sh build.sh
 To train the *Harlow Agent* present in `meta-rl` run:
 `sh train.sh`
 
-## Getting started on Linux
 
-* Get [Bazel from bazel.io](https://docs.bazel.build/versions/master/install.html).
+# Results
 
-* Clone DeepMind Lab, e.g. by running
+## Harlow task
 
-```shell
-$ git clone https://github.com/deepmind/lab
-$ cd lab
-```
+<p align="center">
+  <img src="/docs/template/harlow_task.gif" alt="Harlow Task">
+</p>
 
-For a live example of a random agent, run
+## Two-step task
 
-```shell
-lab$ bazel run :python_random_agent --define graphics=sdl -- \
-               --length=10000 --width=640 --height=480
-```
+We reproduced the plot from [Prefrontal cortex as a meta-reinforcement learning system](https://www.biorxiv.org/content/biorxiv/early/2018/04/13/295964.full.pdf) (Simulation 4, Figure b), on the right). We launched n=8 trainings using different seeds, but with the same hyperparameters as the paper, to compare to the results obtained by Wang et al.
 
-Here is some [more detailed build documentation](/docs/users/build.md),
-including how to install dependencies if you don't have them.
+For each seed, the training consisted of 20k episodes of 100 trials (instead of 10k episodes of 100 trials in the paper). The reason for our number of episodes choice is that, in our case, the learning seemed to converge after around ~20k episodes for most seeds.
 
-To enable compiler optimizations, pass the flag `--compilation_mode=opt`, or
-`-c opt` for short, to each `bazel build`, `bazel test` and `bazel run` command.
-The flag is omitted from the examples here for brevity, but it should be used
-for real training and evaluation where performance matters.
+![reward curve](results/biorxiv/final/reward_curve.png)
 
-### Play as a human
+After training, we tested the 8 different models for 300 further episodes (like in the paper), with the weights of the LSTM being fixed.
 
-To test the game using human input controls, run
+Here is the side by side comparison of our results (on the left) with the results from the paper (on the right):
 
-```shell
-lab$ bazel run :game -- --level_script=tests/empty_room_test --level_setting=logToStdErr=true
-# or:
-lab$ bazel run :game -- -l tests/empty_room_test -s logToStdErr=true
-```
+![side by side](results/biorxiv/final/side_by_side.png)
 
-Leave the `logToStdErr` setting off to disable most log output.
 
-### Train an agent
+# Credits
 
-*DeepMind Lab* ships with an example random agent in
-[`python/random_agent.py`](python/random_agent.py)
-which can be used as a starting point for implementing a learning agent. To let
-this agent interact with DeepMind Lab for training, run
+This work uses [awjuliani's Meta-RL implementation](https://github.com/awjuliani/Meta-RL).
 
-```shell
-lab$ bazel run :python_random_agent
-```
+For the two-step task, I worked closely with [Yasmine Hamdani](https://github.com/Yasmine-H), and for the harlow task and FloydHub installation, I couldn't have done without my dear friend [Kevin Costa](https://github.com/kcosta42), and the additional details provided kindly by [Jane Wang](http://www.janexwang.com/).
 
-The [Python API](/docs/users/python_api.md)
-is used for agent-environment interactions.
-
-*DeepMind Lab* ships with [different
-levels](/docs/levels.md) implementing different
-tasks. These tasks can be configured using Lua scripts, as described in the [Lua
-API](/docs/developers/reference/lua_api.md).
-
------------------
-
-## Upstream sources
-
-*DeepMind Lab* is built from the *ioquake3* game engine, and it uses the tools
-*q3map2* and *bspc* for map creation. Bug fixes and cleanups that originate
-with those projects are best fixed upstream and then merged into *DeepMind Lab*.
-
-* *bspc* is taken from [github.com/TTimo/bspc](https://github.com/TTimo/bspc),
-  revision d9a372db3fb6163bc49ead41c76c801a3d14cf80. There are virtually no
-  local modifications, although we integrate this code with the main ioq3 code
-  and do not use their copy in the `deps` directory. We expect this code to be
-  stable.
-
-* *q3map2* is taken from
-  [github.com/TTimo/GtkRadiant](https://github.com/TTimo/GtkRadiant),
-  revision d3d00345c542c8d7cc74e2e8a577bdf76f79c701. A few minor local
-  modifications add synchronization. We also expect this code to be stable.
-
-* *ioquake3* is taken from
-  [github.com/ioquake/ioq3](https://github.com/ioquake/ioq3),
-  revision 29db64070aa0bae49953bddbedbed5e317af48ba. The code contains extensive
-  modifications and additions. We aim to merge upstream changes occasionally.
-
-We are very grateful to the maintainers of these repositories for all their hard
-work on maintaining high-quality code bases.
-
-## External dependencies, prerequisites and porting notes
-
-*DeepMind Lab* currently ships as source code only. It depends on a few external
-software libraries, which we ship in several different ways:
-
- * The `zlib`, `glib`, `libxml2`, `jpeg` and `png` libraries are referenced as
-   external Bazel sources, and Bazel BUILD files are provided. The dependent
-   code itself should be fairly portable, but the BUILD rules we ship are
-   specific to Linux on x86. To build on a different platform you will most
-   likely have to edit those BUILD files.
-
- * Message digest algorithms are included in this package (in
-   [`//third_party/md`](third_party/md)), taken from the reference
-   implementations of their respective RFCs. A "generic reinforcement learning
-   API" is included in [`//third_party/rl_api`](third_party/rl_api), which has
-   also been created by the *DeepMind Lab* authors. This code is portable.
-
- * EGL headers are included in this package (in
-   `//third_party/GL/{`[`EGL`](third_party/GL/EGL)`,`[`KHR`](third_party/GL/KHR)`}`),
-   taken from the Khronos OpenGL/OpenGL ES XML API Registry at
-   [www.khronos.org/registry/EGL](http://www.khronos.org/registry/EGL/). The
-   headers have been modified slightly to remove the dependency of EGL on X.
-
- * Several additional libraries are required but are not shipped in any form;
-   they must be present on your system:
-   * SDL 2
-   * gettext (required by `glib`)
-   * OpenGL: A hardware driver and library are needed for hardware-accelerated
-     human play. The headless library that machine learning agents will want to
-     use can use either hardware-accelerated rendering via EGL or GLX or
-     software rendering via OSMesa, depending on the `--define headless=...`
-     build setting.
-   * Python 2.7 (other versions might work, too) with NumPy, PIL. (A few tests
-     require a NumPy version of at least 1.8.) Python 3 (at least 3.5) is
-     supported experimentally.
-
-The build rules are using a few compiler settings that are specific to GCC. If
-some flags are not recognized by your compiler (typically those would be
-specific warning suppressions), you may have to edit those flags. The warnings
-should be noisy but harmless.
