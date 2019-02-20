@@ -55,13 +55,13 @@ We reproduced the plot from [Prefrontal cortex as a meta-reinforcement learning 
 
 For each seed, the training consisted of 20k episodes of 100 trials (instead of 10k episodes of 100 trials in the paper). The reason for our number of episodes choice is that, in our case, the learning seemed to converge after around ~20k episodes for most seeds.
 
-![reward curve](results/biorxiv/final/reward_curve.png)
+![reward curve](https://raw.githubusercontent.com/mtrazzi/two-step-task/master/results/biorxiv/final/reward_curve.png)
 
 After training, we tested the 8 different models for 300 further episodes (like in the paper), with the weights of the LSTM being fixed.
 
 Here is the side by side comparison of our results (on the left) with the results from the paper (on the right):
 
-![side by side](results/biorxiv/final/side_by_side.png)
+![side by side](https://raw.githubusercontent.com/mtrazzi/two-step-task/master/results/biorxiv/final/side_by_side.png)
 
 
 # Credits
