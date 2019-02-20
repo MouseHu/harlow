@@ -18,14 +18,12 @@ For more infor about DeepMind Lab, you can checkout their repo [here](https://gi
 
 To download the repository:
 
-`git clone https://github.com/mtrazzi/lab.git`
+`git clone https://github.com/mtrazzi/harlow.git`
 
 You also need to fetch the [`meta-rl`](https://github.com/mtrazzi/meta-rl.git) repository:
 
 ```
-cd lab
-git checkout floydhub
-cd python
+cd harlow/python
 git submodule init
 git submodule update
 cd ..
@@ -47,6 +45,10 @@ To train the *Harlow Agent* present in `meta-rl` run:
 
 <p align="center">
   <img src="/docs/template/harlow_task.gif" alt="Harlow Task">
+</p>
+
+<p align="center">
+  *In environment footage, captured via human player.*
 </p>
 
 ## Two-step task
