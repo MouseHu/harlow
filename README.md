@@ -20,7 +20,7 @@ To download the repository:
 
 `git clone https://github.com/mtrazzi/harlow.git`
 
-You also need to fetch the [`meta-rl`](https://github.com/mtrazzi/meta-rl.git) repository:
+You also need to fetch the [`meta_rl`](https://github.com/mtrazzi/meta_rl.git) repository:
 
 ```
 cd harlow/python
@@ -35,7 +35,7 @@ sh install.sh
 sh build.sh
 ```
 
-To train the *Harlow Agent* present in `meta-rl` run:
+To train the *Harlow Agent* present in `meta_rl` run:
 `sh train.sh`
 
 
