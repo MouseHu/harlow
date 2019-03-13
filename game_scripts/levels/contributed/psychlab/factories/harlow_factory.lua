@@ -60,14 +60,14 @@ evaluation images (held out from training).
 
 local TIME_TO_FIXATE_CROSS = 1 -- 4 -- in frames
 local TIME_TO_FIXATE_TARGET = 1 -- 4 -- in frames
-local FAST_INTER_TRIAL_INTERVAL = 5 -- in frames
+local FAST_INTER_TRIAL_INTERVAL = 2 -- 5 -- in frames
 local SCREEN_SIZE = {width = 512, height = 512}
 local BG_COLOR = {0, 0, 0}
 local TRIALS_PER_EPISODE_CAP = 6
 
 local TARGET_SIZE = 0.4
 
-local FIXATION_REWARD = 1
+local FIXATION_REWARD = 0
 local CORRECT_REWARD = 5
 local INCORRECT_REWARD = -5
 
@@ -123,8 +123,8 @@ function factory.createLevelApi(kwargs)
 
   -- 'init' gets called at the start of each episode.
   function env:_init(pac, opts)
-    log.info('opts passed to _init:\n' .. helpers.tostring(opts))
-    log.info('ARG passed to _init:\n' .. helpers.tostring(ARG))
+    --log.info('opts passed to _init:\n' .. helpers.tostring(opts))
+    --log.info('ARG passed to _init:\n' .. helpers.tostring(ARG))
 
     if self.dataset == nil then
       self.dataset = brady_konkle_oliva2008(opts)
@@ -181,8 +181,8 @@ function factory.createLevelApi(kwargs)
     if self.incorrectID >= self.correctID then
       self.incorrectID = self.incorrectID + 1
     end
-    log.info('Episode set up, corrID=' .. self.correctID ..
-             ', incorrID=' .. self.incorrectID)
+    --log.info('Episode set up, corrID=' .. self.correctID ..
+    --         ', incorrID=' .. self.incorrectID)
   end
 
   function env:setupImages()
