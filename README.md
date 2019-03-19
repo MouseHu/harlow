@@ -113,6 +113,19 @@ We tried to reproduce the results from [Prefrontal cortex as a meta-reinforcemen
 
 For each seed, the training consisted in ~10k episodes (instead of 10^5 episodes per thread (32 threads) in the paper). The reason for our number of episodes choice is that, in our case, the learning seemed to have reached a threshold after ~7k episodes for all seeds.
 
+## Dataset
+For our dataset we used profile pictures of our friends at 42 (software enginneering education), resized to 256x256 (to tweak the dataset to your own needs, see here).
+
+Example of a run of the agent on the dataset (after training):
+<p align="center">
+  <img src="/docs/template/frames.gif" alt="observations">
+</p>
+
+What the agent sees for the run above (after pre-processing):
+<p align="center">
+  <img src="/docs/template/agent_view.gif" alt="agent view">
+</p>
+
 ## Reward Curve
 
 Here is the reward curve (one color per seed) after ~10k episodes (which took approximately 3 days to train) on FloydHub's CPU:
