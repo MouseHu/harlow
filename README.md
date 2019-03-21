@@ -3,12 +3,12 @@
 </p>
 
 <p align="center">
-  <b>In environment footage, captured via human player</b>
+  <b>In environment footage, captured by human player</b>
 </p>
 
 [![Run on FloydHub](https://img.shields.io/badge/Run%20on-FloydHub-blue.svg)](https://floydhub.com/run?template=https://github.com/mtrazzi/harlow)
 
-⚠ **Note**: This is the code for my article [Meta-Reinforcement Learning](https://blog.floydhub.com/author/michaeltrazzi/) on FloydHub. This repository is for the Harlow task. For the two-step task see [this repository](https://github.com/mtrazzi/two-step-task) instead.⚠
+⚠ **Note**: This is the code for my article [Meta-Reinforcement Learning](https://blog.floydhub.com/author/michaeltrazzi/) on FloydHub. This repository is for DeepMind Lab and the Harlow task environment. For the git submodule containing all the tensorflow code and the DeepMind Lab wrapper, see [this repository](https://github.com/mtrazzi/meta_rl). For the two-step task see [this repository](https://github.com/mtrazzi/two-step-task) instead.⚠
 
 Here, we try to reproduce the simulations regarding the harlow task as described in the two papers:
 - [Learning to Reinforcement Learn, Wang et al., 2016](https://arxiv.org/pdf/1611.05763v1.pdf)
@@ -91,9 +91,9 @@ harlow
         └── README.md
 ```
 
-Most of our code is in [`python`](https://github.com/mtrazzi/harlow/tree/master/python).
+Most of our code is in the repository [`python`](https://github.com/mtrazzi/harlow/tree/master/python) where you'll find our git submodule [`meta-rl`](https://github.com/mtrazzi/meta_rl), that contains the three most important files: [`harlow.py`](https://github.com/mtrazzi/meta_rl/blob/master/harlow.py), [`meta_rl/worker.py`](https://github.com/mtrazzi/meta_rl/blob/master/meta_rl/worker.py) and [`meta_rl/ac_network.py`](https://github.com/mtrazzi/meta_rl/blob/master/meta_rl/ac_network.py).
 
-In python, you'll find our git submodule [`meta-rl`](https://github.com/mtrazzi/meta_rl), that contains the three most important files: [`harlow.py`](https://github.com/mtrazzi/meta_rl/blob/master/harlow.py), [`meta_rl/worker.py`](https://github.com/mtrazzi/meta_rl/blob/master/meta_rl/worker.py) and [`meta_rl/ac_network.py`](https://github.com/mtrazzi/meta_rl/blob/master/meta_rl/ac_network.py).
+⚠ **For more details about those three important files, check out the README of the [`meta-rl`](https://github.com/mtrazzi/meta_rl) repo, that also contains more information about the different architectures we tried and the on-going projects.** ⚠
 
 Apart from that, the other essential files are:
 - The Lua script for the Harlow Task Environment: [`game_scripts/levels/contributed/psychlab/factories/harlow_factory.lua`](https://github.com/mtrazzi/harlow/blob/master/game_scripts/levels/contributed/psychlab/factories/harlow_factory.lua)
@@ -116,7 +116,7 @@ We tried to reproduce the results from [Prefrontal cortex as a meta-reinforcemen
 For each seed, the training consisted in ~10k episodes (instead of 10^5 episodes per thread (32 threads) in the paper). The reason for our number of episodes choice is that, in our case, the learning seemed to have reached a threshold after ~7k episodes for all seeds.
 
 ## Dataset
-For our dataset we used profile pictures of our friends at 42 (software enginneering education), resized to 256x256 (to tweak the dataset to your own needs, see here).
+For our dataset we used profile pictures of our friends at 42 (software enginneering education), resized to 256x256 (to tweak the dataset to your own needs, see [here](https://github.com/mtrazzi/harlow/blob/master/README.md#dataset)).
 
 Example of a run of the agent on the dataset (after training):
 <p align="center">
