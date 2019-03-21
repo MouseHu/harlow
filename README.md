@@ -26,6 +26,7 @@ For more info about DeepMind Lab, you can checkout their repo [here](https://git
 ```$ git clone https://github.com/mtrazzi/harlow.git```
 
 2. Change current directory to [`harlow/python`](https://github.com/mtrazzi/harlow/tree/master/python):
+
 ```$ cd harlow/python```
 
 2. Fetch the git submodule [`meta_rl`](https://github.com/mtrazzi/meta_rl.git):
@@ -36,6 +37,7 @@ python$ git submodule update --remote
 ```
 
 4. Change current directory to the root of the repo:
+
 ```
 python$ cd ..
 ```
@@ -152,7 +154,7 @@ The DeepMind Lab release supports Python2.7, but you can find some documentation
 
 Currently, our branch [`python2`](https://github.com/mtrazzi/harlow/tree/python2) supports Python2.7 and MacOS, and our branch [`master`](https://github.com/mtrazzi/harlow) supports Python3.6 and Linux.
 - The branch [`python2`](https://github.com/mtrazzi/harlow/tree/python2) should work on iMac's available at [42](https://www.42.us.org/) (software engineering education).
-- The branch [`master`](https://github.com/mtrazzi/harlow) was tested on FloydHub's instances (using `Tensorflow 1.12` and `CPU`). To change for `GPU`, change 
+- The branch [`master`](https://github.com/mtrazzi/harlow) was tested on FloydHub's instances (using `Tensorflow 1.12` and `CPU`). To change for `GPU`, change `tf.device("/cpu:0")` with `tf.device("/device:GPU:0")` in [`harlow.py`](https://github.com/mtrazzi/meta_rl/blob/master/harlow.py).
 
 ## Dependencies
 
