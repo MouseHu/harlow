@@ -19,6 +19,12 @@ tasks for learning agents. Its primary purpose is to act as a testbed for
 research in artificial intelligence, especially deep reinforcement learning.
 For more info about DeepMind Lab, you can checkout their repo [here](https://github.com/deepmind/lab).
 
+# Discussion
+
+I answer questions and give more informations here:
+- [Hacker news](https://news.ycombinator.com/item?id=19503985)
+- [r/MachineLearning](https://www.reddit.com/r/MachineLearning/comments/b688id/p_reimplementing_deepminds_metarl_papers/)
+
 # Getting Started
 
 1. Clone the repository:
