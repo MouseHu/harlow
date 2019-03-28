@@ -142,6 +142,10 @@ Here is the reward curve (one color per seed) after ~10k episodes (which took ap
   <img src="/docs/template/reward_cuve_5_seeds_42_images.png" alt="reward curve 5 seeds 42 images">
 </p>
 
+## Additional results
+
+I added a repo containing checkpoints (for tensorboard) for the 5 seeds [here](https://github.com/mtrazzi/harlow/blob/master/docs/template/all_seeds.zip), and the corresponding curves for rewards, policy loss, entropy loss in [this](https://github.com/mtrazzi/harlow/tree/master/docs/template) repository.
+
 # Configure the repo
 
 ## Dataset
